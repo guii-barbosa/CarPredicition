@@ -1,6 +1,8 @@
 name: Pipeline Car Prediction
 
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
