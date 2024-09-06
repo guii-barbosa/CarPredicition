@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="formstyle.css"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;    
+            background-image: url('https://cdn.autopapo.com.br/box/uploads/2019/01/08125810/patio-carro-antigo-fusca-agencia-camara-alexandre-vieira.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: "Montserrat", sans-serif;
+            color: #35362e;
+        }
+        #forms {
+            border-radius: 10px;
+            width: 400px;
+            background: #f9f9f9;
+            padding: 10px 20px;
+            text-align: left;
+            margin: 50px auto;
+            box-shadow: 0px 1px 20px black;
+        }
+        h3 {
+            text-align: center;
+            text-decoration: underline;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        h4 {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        fieldset {
+            border: none;
+            margin: 0 0 30px;
+            padding: 0;
+        }
+        p {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .radio-group label {
+            margin-right: 15px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 5px;
+        }
+        .radio-group {
+            gap: 10px;
+        }
+        button {
+            cursor: pointer;
+            background: blue;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: darkblue;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .result.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form id="forms" method="post" action="{{ url_for('novos_dados') }}">
+        <h3>Barbosa Concessionária</h3>
+        <h4>Informe os dados dos seus carros</h4>
+
+        <fieldset>
+            <p>Rate the purchase price</p>
+            <div class="radio-group">
+                <label for="compra-vhigh">
+                    <input type="radio" id="compra-vhigh" name="compra" value="vhigh" required {% if retorno and retorno['compra'] == 'vhigh' %}checked{% endif %} />
+                    Very High
+                </label>
+                <label for="compra-high">
+                    <input type="radio" id="compra-high" name="compra" value="high" required {% if retorno and retorno['compra'] == 'high' %}checked{% endif %} />
+                    High
+                </label>
+                <label for="compra-med">
+                    <input type="radio" id="compra-med" name="compra" value="med" required {% if retorno and retorno['compra'] == 'med' %}checked{% endif %} />
+                    Medium
+                </label>
+                <label for="compra-low">
+                    <input type="radio" id="compra-low" name="compra" value="low" required {% if retorno and retorno['compra'] == 'low' %}checked{% endif %} />
+                    Low
+                </label>
+            </div>
+
+            <p>Rate the purchase maintenance</p>
+            <div class="radio-group">
+                <label for="manutencao-vhigh">
+                    <input type="radio" id="manutencao-vhigh" name="manutencao" value="vhigh" required {% if retorno and retorno['manutencao'] == 'vhigh' %}checked{% endif %} />
+                    Very High
+                </label>
+                <label for="manutencao-high">
+                    <input type="radio" id="manutencao-high" name="manutencao" value="high" required {% if retorno and retorno['manutencao'] == 'high' %}checked{% endif %} />
+                    High
+                </label>
+                <label for="manutencao-med">
+                    <input type="radio" id="manutencao-med" name="manutencao" value="med" required {% if retorno and retorno['manutencao'] == 'med' %}checked{% endif %} />
+                    Medium
+                </label>
+                <label for="manutencao-low">
+                    <input type="radio" id="manutencao-low" name="manutencao" value="low" required {% if retorno and retorno['manutencao'] == 'low' %}checked{% endif %} />
+                    Low
+                </label>  
+            </div>
+
+            <p>Select the number of doors</p>
+            <div class="radio-group">
+                <label for="portas-2">
+                    <input type="radio" id="portas-2" name="portas" value="2" required {% if retorno and retorno['portas'] == '2' %}checked{% endif %} />
+                    2
+                </label>
+                <label for="portas-3">
+                    <input type="radio" id="portas-3" name="portas" value="3" required {% if retorno and retorno['portas'] == '3' %}checked{% endif %} />
+                    3
+                </label>
+                <label for="portas-4">
+                    <input type="radio" id="portas-4" name="portas" value="4" required {% if retorno and retorno['portas'] == '4' %}checked{% endif %} />
+                    4
+                </label>
+                <label for="portas-5more">
+                    <input type="radio" id="portas-5more" name="portas" value="5more" required {% if retorno and retorno['portas'] == '5more' %}checked{% endif %} />
+                    5 or more
+                </label>
+            </div>
+
+            <p>Select the people capacity</p>
+            <div class="radio-group">
+                <label for="pessoas-2">
+                    <input type="radio" id="pessoas-2" name="pessoas" value="2" required {% if retorno and retorno['pessoas'] == '2' %}checked{% endif %} />
+                    2
+                </label>
+                <label for="pessoas-4">
+                    <input type="radio" id="pessoas-4" name="pessoas" value="4" required {% if retorno and retorno['pessoas'] == '4' %}checked{% endif %} />
+                    4
+                </label>
+                <label for="pessoas-more">
+                    <input type="radio" id="pessoas-more" name="pessoas" value="more" required {% if retorno and retorno['pessoas'] == 'more' %}checked{% endif %} />
+                    More
+                </label>
+            </div>
+
+            <p>Select the car trunk capacity</p>
+            <div class="radio-group">
+                <label for="porta-malas-small">
+                    <input type="radio" id="porta-malas-small" name="porta-malas" value="small" required {% if retorno and retorno['porta-malas'] == 'small' %}checked{% endif %} />
+                    Small
+                </label>
+                <label for="porta-malas-med">
+                    <input type="radio" id="porta-malas-med" name="porta-malas" value="med" required {% if retorno and retorno['porta-malas'] == 'med' %}checked{% endif %} />
+                    Medium
+                </label>
+                <label for="porta-malas-big">
+                    <input type="radio" id="porta-malas-big" name="porta-malas" value="big" required {% if retorno and retorno['porta-malas'] == 'big' %}checked{% endif %} />
+                    Big
+                </label>
+            </div>
+
+            <p>Rate the security of your car</p>
+            <div class="radio-group">
+                <label for="seguranca-low">
+                    <input type="radio" id="seguranca-low" name="seguranca" value="low" required {% if retorno and retorno['seguranca'] == 'low' %}checked{% endif %} />
+                    Low
+                </label>
+                <label for="seguranca-med">
+                    <input type="radio" id="seguranca-med" name="seguranca" value="med" required {% if retorno and retorno['seguranca'] == 'med' %}checked{% endif %} />
+                    Medium
+                </label>
+                <label for="seguranca-high">
+                    <input type="radio" id="seguranca-high" name="seguranca" value="high" required {% if retorno and retorno['seguranca'] == 'high' %}checked{% endif %} />
+                    High
+                </label>
+            </div>
+
+            <button type="submit" id="envia">Veja o Resultado</button>
+
+        </fieldset>
+
+        {% if avaliacao %}
+        <div id="resultado" class="result show">A avaliação do carro é: {{ avaliacao }}</div>
+        {% else %}
+        <div id="resultado" class="result show">Esperando resultado🚗</div>
+        {% endif %}
+    </form>
+ </body>
+</html>
