@@ -35,3 +35,11 @@ jobs:
       with:
         service-id: srv-crddunrtq21c73d2fg50
         api-key: rnd_AEkH5UZCPxUdARznEAevOzB4obY3
+
+    - name: Deploy no EC2 AWS
+      run: |
+           echo "Conectando no EC2"
+           ssh -i ${{secrets.AWS_KEY}} ubuntu@ec2-3-82-41-39.compute-1.amazonaws.com
+           cd CarPredicition
+           git pull 
+           ./executar.sh
