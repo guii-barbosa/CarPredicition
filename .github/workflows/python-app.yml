@@ -38,7 +38,7 @@ jobs:
 
     - name: Deploy no EC2 AWS
       run: |
-           echo "Conectando no EC2"
+           echo "Conectando no EC2 pelo SSH"
            ssh -i ${{secrets.AWS_KEY}} ubuntu@ec2-3-82-41-39.compute-1.amazonaws.com
            cd CarPredicition
            git pull 
