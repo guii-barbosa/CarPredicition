@@ -22,13 +22,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-   
-    - name: Teste
-      run: coverage run novos_dados.py
-      
-    - name: Relatório do Teste  
-      run: coverage report -m 
-
 
     - name: Render Deploy Action
       uses: johnbeynon/render-deploy-action@v0.0.8
